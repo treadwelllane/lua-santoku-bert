@@ -14,11 +14,12 @@ description = {
 
 dependencies = {
   "lua >= 5.1",
+  "santoku >= 0.0.91-1",
 }
 
 test_dependencies = {
-  "santoku >= 0.0.87-1",
   "luafilesystem >= 1.8.0-1",
+  "luasocket >= 3.1.0-1",
   "luassert >= 1.9.0-1",
   "luacov >= 0.15.0",
 }
