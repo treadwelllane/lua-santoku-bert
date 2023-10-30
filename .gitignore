@@ -9,3 +9,5 @@
 !deps/python/Makefile
 *.o
 *.so
+.build
+.old*
