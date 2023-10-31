@@ -2,6 +2,8 @@ local py = require("santoku.python")
 local compat = require("santoku.compat")
 local vec = require("santoku.vector")
 
+py.open("libpython3.11.so")
+
 local faiss = py.import("faiss")
 local sbert = py.import("sentence_transformers")
 
@@ -38,10 +40,12 @@ end
 M.IDX_ENCODER.encode = function (enc, str)
   assert(compat.hasmeta(enc, M.MT_ENCODER))
   assert(compat.istype.string(str))
-  local embd = enc.encoder.encode(str, py.kwargs({
+  local kwargs = py.kwargs({
     convert_to_numpy = true,
     normalize_embeddings = true
-  })).reshape(1, enc.dimensions)
+  })
+  local embd = enc.encoder.encode(str, kwargs)
+  embd = embd.reshape(1, enc.dimensions)
   return setmetatable({ embd = embd }, M.MT_EMBEDDING)
 end
 
