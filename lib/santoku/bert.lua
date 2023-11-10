@@ -1,8 +1,7 @@
-local py = require("santoku.python")
 local compat = require("santoku.compat")
 local vec = require("santoku.vector")
-
-py.open("libpython3.11.so")
+local err = require("santoku.err")
+local py = err.check(require("santoku.python")("libpython3.11.so"))
 
 local faiss = py.import("faiss")
 local sbert = py.import("sentence_transformers")
